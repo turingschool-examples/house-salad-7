@@ -4,13 +4,10 @@ class SearchFacade
   end
 
   def members
-    conn = Faraday.new(url: "https://api.propublica.org") do |faraday|
-      faraday.headers["X-API-Key"] = ENV["PROPUBLICA_API_KEY"]
-    end
+    service = CongressService.new
 
-    response = conn.get("/congress/v1/members/house/#{@state}/current.json")
-
-    json = JSON.parse(response.body, symbolize_names: true)
+    json = service.members_by_state(@state)
+    
     @members = json[:results].map do |member_data|
       Member.new(member_data)
     end
