@@ -1,17 +1,20 @@
 class SearchController < ApplicationController
   def index
     @facade = SearchFacade.new(params[:state])
-    # state = params[:state]
+  end
 
-    # conn = Faraday.new(url: "https://api.propublica.org") do |faraday|
-    #   faraday.headers["X-API-Key"] = ENV["PROPUBLICA_API_KEY"]
-    # end
+  def search
+    conn = Faraday.new(url: "https://api.propublica.org") do |faraday|
+      faraday.headers["X-API-KEY"] = ENV["PROPUBLICA_API_KEY"]
+    end
+    response = conn.get("/congress/v1/116/senate/members.json")
 
-    # response = conn.get("/congress/v1/members/house/#{state}/current.json")
+    data = JSON.parse(response.body, symbolize_names: true)
 
-    # json = JSON.parse(response.body, symbolize_names: true)
-    # @members = json[:results].map do |member_data|
-    #   Member.new(member_data)
-    # end
+    members = data[:results][0][:members]
+
+    found_members = members.find_all {|m| m[:last_name] == params[:search]}
+    @member = found_members.first
+    render "welcome/index"
   end
 end

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   root "welcome#index"
   get "/search", to: "search#index"
+  post "/search", to: "search#search"
 end
