@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature "user can search for house members" do
-  scenario "user submits valid state name" do
+  scenario "user submits valid state name", :vcr do
     # As a user
     # When I visit "/"
     visit '/'
