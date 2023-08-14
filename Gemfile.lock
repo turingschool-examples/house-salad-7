@@ -221,6 +221,7 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
+  arm64-darwin-21
   arm64-darwin-22
   x86_64-darwin-21
 
@@ -235,7 +236,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry
   puma (~> 5.0)
-  rails (~> 7.0.4, >= 7.0.4.2)
+  rails (~> 7.0.5)
   rspec-rails
   sprockets-rails
   stimulus-rails
