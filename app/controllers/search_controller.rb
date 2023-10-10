@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     state = params[:state]
 
     conn = Faraday.new(url: "https://api.propublica.org") do |faraday|
-      faraday.headers["X-API-Key"] = ENV["PROPUBLICA_API_KEY"]
+      faraday.headers["X-API-Key"] = Rails.application.credentials.propublica[:key]
     end
 
     response = conn.get("/congress/v1/members/house/#{state}/current.json")
