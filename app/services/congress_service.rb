@@ -10,7 +10,7 @@ class CongressService
 
   def conn
     Faraday.new(url: "https://api.propublica.org") do |faraday|
-      faraday.headers["X-API-Key"] = ENV["PROPUBLICA_API_KEY"]
+      faraday.headers["X-API-Key"] = Rails.application.credentials.propublica[:key]
     end
   end
 end
