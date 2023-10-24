@@ -6,7 +6,11 @@ class Api::V1::SearchController < ApplicationController
   
   def show
     result = SearchFacade.new(params[:state], params[:search]).search_results
-    render json: 
-      SenateMemberSerializer.new.serialize_json(result)
+    if result.class == SenateMember
+      render json: 
+        SenateMemberSerializer.new.serialize_json(result)
+    else
+      render json: ErrorMemberSerializer.new(result).serialized_json
+    end
   end
 end
