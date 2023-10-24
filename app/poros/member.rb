@@ -1,13 +1,13 @@
 class Member
   attr_reader :name,
-              :role,
-              :party,
-              :district
+              :party
 
   def initialize(attributes)
-    @name       = attributes[:name]
-    @role       = attributes[:role]
+    @name       = full_name(attributes)
     @party      = attributes[:party]
-    @district   = attributes[:district]
+  end
+
+  def full_name(data)
+    "#{data[:first_name]} #{data[:last_name]}"
   end
 end

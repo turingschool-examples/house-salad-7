@@ -1,0 +1,15 @@
+<%= form_with url: search_path, method: :get do |form| %>
+  <div class="form-group search-field">
+    <%= form.select :state, options_for_select(us_states) %>
+    <%= form.submit "Locate Members of the House", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= form_with url: search_path, method: :get do |form| %>
+  <%= form.label :search, 'Search For Senators By Last Name:' %>
+  <%= form.text_field :search %>
+  <%= form.submit 'Search' %>
+<% end %>
+<% if @member %>
+    <h5>Senator <%= @member[:first_name].concat(" ").concat(@member[:last_name]) %> was found! Their twitter is: <%= @member[:twitter_account] %></h5>
+<% end %>
