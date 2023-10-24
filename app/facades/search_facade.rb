@@ -17,10 +17,10 @@ class SearchFacade
   end
 
   def senate_member_by_last_name
-    if !members_by_last_name(@last_name).empty?
-      match = members_by_last_name(@last_name).first
+    match = members_by_last_name(@last_name).first
+    begin
       SenateMember.new(match)
-    else 
+    rescue NoMethodError => e
       ErrorMember.new("No members found with the last name: #{@last_name}", "NOT FOUND", 404)
     end
   end
