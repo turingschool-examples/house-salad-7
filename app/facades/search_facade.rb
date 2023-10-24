@@ -17,8 +17,12 @@ class SearchFacade
   end
 
   def senate_member_by_last_name
-    match = members_by_last_name(@last_name).first
-    SenateMember.new(match)
+    if !members_by_last_name(@last_name).empty?
+      match = members_by_last_name(@last_name).first
+      SenateMember.new(match)
+    else 
+      ErrorMember.new("No members found with the last name: #{@last_name}", "NOT FOUND", 404)
+    end
   end
 
   def members_by_last_name(last_name)
