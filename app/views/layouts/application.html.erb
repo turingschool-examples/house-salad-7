@@ -13,6 +13,9 @@
    <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
         <%= link_to "HouseSalad", root_path, class: "navbar-brand" %>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: name %>
+        <% end %>
       </div>
     </nav>
     <%= yield %>
