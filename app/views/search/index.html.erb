@@ -1,5 +1,5 @@
 
-<% if @results.count > 1 %>
+<% if @results.is_a?(Array) %>
   <h1><%= @results.count %> Results </h1>
   <% @results.each do |member| %>
     <ul class="member">
@@ -10,6 +10,6 @@
   </ul>
   <% end %>
 <% else %>
-  <h1>Senator <%= @results.first.name %> was found!</h1>
-  <p>Their twitter is <%= @results.first.twitter %>.</p>
+  <h1>Senator <%= @results.name %> was found!</h1>
+  <p>Their twitter is <%= @results.twitter %>.</p>
 <% end %>

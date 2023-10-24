@@ -4,6 +4,14 @@ class SearchFacade
     @last_name = last_name
   end
 
+  def search_results
+    if @last_name
+      senate_member_by_last_name
+    else
+      house_members
+    end
+  end
+
   def all_senate_members
     json = CongressService.new.senate_members[:results][0][:members]
   end
