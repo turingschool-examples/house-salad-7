@@ -13,7 +13,7 @@ class SearchFacade
   end
 
   def all_senate_members
-    json = CongressService.new.senate_members[:results][0][:members]
+    CongressService.new.senate_members[:results][0][:members]
   end
 
   def senate_member_by_last_name
