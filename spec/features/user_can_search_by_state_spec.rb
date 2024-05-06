@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature "user can search for members" do
 
-  scenario "user submits valid state name" do
+  scenario "user submits valid state name", :vcr do
     # As a user
     # When I visit "/"
     visit '/'
@@ -19,6 +19,6 @@ feature "user can search for members" do
       expect(page).to have_css(".party")
       expect(page).to have_css(".state")
     end
-    # And I should see a name, role, party, and state for each member
   end
+    # And I should see a name, role, party, and state for each member
 end
