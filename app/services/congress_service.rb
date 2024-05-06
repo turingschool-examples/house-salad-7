@@ -1,16 +1,16 @@
 class CongressService
-  def members_by_state(state)
-    get_url("/congress/v1/members/house/#{state}/current.json")
+  def members
+    get_url("/v3/member?limit=250")
   end
-
+  
   def get_url(url)
     response = conn.get(url)
     JSON.parse(response.body, symbolize_names: true)
   end
 
   def conn
-    Faraday.new(url: "https://api.propublica.org") do |faraday|
-      faraday.headers["X-API-Key"] = ENV["PROPUBLICA_API_KEY"]
+    Faraday.new(url: "https://api.congress.gov") do |faraday|
+      faraday.headers["X-API-Key"] = Rails.application.credentials.congress[:key]
     end
   end
 end
