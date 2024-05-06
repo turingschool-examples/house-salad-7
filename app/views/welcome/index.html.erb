@@ -4,5 +4,6 @@
   <%= form.submit 'Search' %>
 <% end %>
 <% if @member %>
-    <h5>Senator <%= @member[:first_name].concat(" ").concat(@member[:last_name]) %> was found! Their twitter is: <%= @member[:twitter_account] %></h5>
+    <h5><%= @member[:name] %> was found!</h5>
+    <p><%= image_tag @member[:depiction][:imageUrl], class: 'senator-image' %></p>
 <% end %>
