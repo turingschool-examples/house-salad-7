@@ -7,7 +7,7 @@ feature "user can search for members" do
     # When I visit "/"
     visit '/'
 
-    select "Colorado", from: :state
+    select "CO", from: :state
     # And I select "Colorado" from the dropdown
     click_on "Locate Representatives"
     # And I click on "Locate Representatives"

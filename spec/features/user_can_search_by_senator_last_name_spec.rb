@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe 'Senator Search' do
+RSpec.describe 'Congress Search' do
   describe 'happy path' do
     it 'allows user to search for Senators by last name' do
       visit root_path
 
       fill_in :search, with: 'Sanders'
+      fill_in :state, with: "VT"
       click_button 'Search'
 
       expect(page.status_code).to eq 200
@@ -17,6 +18,7 @@ RSpec.describe 'Senator Search' do
       visit root_path
 
       fill_in :search, with: 'Booker'
+      fill_in :state, with: "NJ"
       click_button 'Search'
 
       expect(page.status_code).to eq 200

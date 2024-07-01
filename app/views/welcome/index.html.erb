@@ -1,6 +1,8 @@
 <%= form_with url: search_path, local: true do |form| %>
   <%= form.label :search, 'Search For Senators By Last Name:' %>
   <%= form.text_field :search %>
+  <%= form.label :state, "State Abbreviation:" %>
+  <%= form.text_field :state %>
   <%= form.submit 'Search' %>
 <% end %>
 <% if @member %>

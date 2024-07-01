@@ -5,23 +5,19 @@ class SearchController < ApplicationController
       faraday.headers["X-API-Key"] = Rails.application.credentials.congress[:key]
     end
 
-    response = conn.get("/v3/member?limit=250")
-    
+    response = conn.get("/v3/member/#{state}?limit=250")
+
     json = JSON.parse(response.body, symbolize_names: true)
-    @members_by_state = []
-    json[:members].each do |member_data|
-      if member_data[:state] == state
-        @members_by_state << member_data
-      end
-    end
+    @members_by_state = json[:members]
   end
 
   def search
+    state = params[:state]
     conn = Faraday.new(url: "https://api.congress.gov") do |faraday|
       faraday.headers["X-API-Key"] = Rails.application.credentials.congress[:key]
     end
-    
-    response = conn.get("/v3/member?limit=250")
+    # require 'pry'; binding.pry
+    response = conn.get("/v3/member/#{state}?limit=500")
 
     data = JSON.parse(response.body, symbolize_names: true)
 
@@ -33,11 +29,10 @@ class SearchController < ApplicationController
 
       # manipulate string to only look at last name
       last_name = member[:name].split(' ')[0].gsub(',', '')
-
       # keep if: the last name matches our query, and the member is a senator
       last_name == params[:search] && senator
     end
-    
+  
     @member = found_senators.first
     render "welcome/index"
   end
